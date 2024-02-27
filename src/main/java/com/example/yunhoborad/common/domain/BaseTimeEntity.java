@@ -1,4 +1,4 @@
-package com.example.yunhoborad.global.domain;
+package com.example.yunhoborad.common.domain;
 
 import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;

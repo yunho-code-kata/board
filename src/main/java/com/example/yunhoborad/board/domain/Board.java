@@ -1,6 +1,6 @@
 package com.example.yunhoborad.board.domain;
 
-import com.example.yunhoborad.global.domain.BaseTimeEntity;
+import com.example.yunhoborad.common.domain.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

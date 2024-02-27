@@ -1,20 +1,19 @@
 package com.example.yunhoborad.comment.domain;
 
 import com.example.yunhoborad.board.domain.Board;
-import com.example.yunhoborad.global.domain.BaseTimeEntity;
+import com.example.yunhoborad.common.domain.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BaseTimeEntity {
 
     @Id
@@ -25,5 +24,15 @@ public class Comment extends BaseTimeEntity {
     private String content;
 
     @ManyToOne
+    @JoinColumn(name = "board_id")
     private Board board;
+
+    protected Comment() {
+    }
+
+    @Builder
+    public Comment(String content, Board board) {
+        this.content = content;
+        this.board = board;
+    }
 }

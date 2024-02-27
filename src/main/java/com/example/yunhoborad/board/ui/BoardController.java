@@ -1,9 +1,10 @@
 package com.example.yunhoborad.board.ui;
 
 import com.example.yunhoborad.board.application.BoardService;
-import com.example.yunhoborad.board.dto.BoardReponse;
 import com.example.yunhoborad.board.dto.BoardRequest;
+import com.example.yunhoborad.board.dto.BoardResponse;
 import java.net.URI;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
 
     private final BoardService boardService;
-
     public BoardController(BoardService boardService) {
         this.boardService = boardService;
     }
@@ -28,9 +28,15 @@ public class BoardController {
         return ResponseEntity.created(URI.create("/boards/" + boardId)).build();
     }
 
-    @GetMapping("/{boardId}")
-    public ResponseEntity<BoardReponse> findBoard (@PathVariable Long boardId) {
-        BoardReponse reponse = boardService.findBoard(boardId);
-        return ResponseEntity.ok(reponse);
+    @GetMapping("/{id}")
+    public ResponseEntity<BoardResponse> findBoard (@PathVariable Long id) {
+        BoardResponse response = boardService.findBoard(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<BoardResponse>> findBoards() {
+        List<BoardResponse> responses = boardService.findBoards();
+        return ResponseEntity.ok(responses);
     }
 }

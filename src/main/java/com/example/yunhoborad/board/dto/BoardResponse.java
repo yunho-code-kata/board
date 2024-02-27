@@ -2,14 +2,14 @@ package com.example.yunhoborad.board.dto;
 
 import com.example.yunhoborad.board.domain.Board;
 
-public record BoardReponse(
+public record BoardResponse(
         Long id,
         String title,
         String content
 ) {
 
-    public static BoardReponse from(Board board) {
-        return new BoardReponse(
+    public static BoardResponse from(Board board) {
+        return new BoardResponse(
                 board.getId(),
                 board.getTitle(),
                 board.getContent()

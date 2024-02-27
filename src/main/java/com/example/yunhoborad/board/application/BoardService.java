@@ -1,10 +1,11 @@
 package com.example.yunhoborad.board.application;
 
 import com.example.yunhoborad.board.domain.Board;
-import com.example.yunhoborad.board.dto.BoardReponse;
 import com.example.yunhoborad.board.dto.BoardRequest;
+import com.example.yunhoborad.board.dto.BoardResponse;
 import com.example.yunhoborad.board.repository.BoardRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,10 +31,23 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public BoardReponse findBoard(Long id) {
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("게시글이 없습니다."));
+    public BoardResponse findBoard(Long id) {
+        Board board = findBoardById(id);
 
-        return BoardReponse.from(board);
+        return BoardResponse.from(board);
+    }
+
+    public Board findBoardById(Long id) {
+        return boardRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("id에 해당하는 게시글이 없습니다."));
+    }
+
+    @Transactional(readOnly = true)
+    public List<BoardResponse> findBoards() {
+        List<BoardResponse> responses = boardRepository.findAll().stream()
+                .map(BoardResponse::from)
+                .toList();
+
+        return responses;
     }
 }

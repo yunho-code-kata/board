@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:~/testdb;MODE=MySQL   # 인 메모리
+#    url: jdbc:h2:file:~/testdb;MODE=MySQL;AUTO_SERVER=true   # 파일
+#    url: jdbc:h2:tcp://localhost:9092/~/test;MODE=MySQL;AUTO_SERVER=true
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+  h2:
+    console:
+      enabled: true
